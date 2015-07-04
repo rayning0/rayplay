@@ -1,0 +1,43 @@
+<div class='jumbotron container'>
+    <p>
+      <%= link_to 'Add video now!', new_video_path, class: 'btn btn-primary btn-lg' %> Click button to share your favorite YouTube video.
+    </p>
+</div>
+
+<% if @videos.any? %>
+  <div class='container'>
+    <h1>Latest Videos</h1>
+
+    <div id='player-wrapper'></div>
+
+    <% @videos.in_groups_of(3) do |group| %>
+      <div class='row'>
+        <% group.each do |video| %>
+          <% if video %>
+            <div class="col-md-4"><div class="yt_video thumbnail">
+              <%= link_to 'Delete', video_path(video), method: :delete, class: 'btn btn-primary btn-xs' %>
+
+              <%= image_tag "https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title, class: 'yt_preview img-rounded', :"data-uid" => video.uid %>
+
+              <div class='caption'>
+                <h5><%= video.title %></h5>
+                <p>Published at <%= video.published_at.strftime('%-d %B %Y %H:%M:%S') %> </p><p>
+
+                <%= link_to like_path(video), remote: true do %>
+                  <span class='glyphicon glyphicon-thumbs-up'></span>
+                  <span class='likes' data-id="<%= video.uid %>"><%= video.likes %></span>
+                <% end  %> 
+
+                <%= link_to dislike_path(video), remote: true do %>
+                  <span class='glyphicon glyphicon-thumbs-down'></span>
+                  <span class='dislikes' data-id="<%= video.uid %>"><%= video.dislikes %></span>
+                <% end  %>
+                </p>
+              </div>
+            </div></div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
