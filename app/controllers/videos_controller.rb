@@ -5,7 +5,7 @@ class VideosController < ApplicationController
 
   def index
     puts "index: #{user.playlist.reverse}"
-    puts "video ids: #{user.videos.map(&:id)}"
+    puts "video ids: #{user.videos.map(&:id).reverse}"
     @videos = user.videos.reverse
   end
 
@@ -53,7 +53,7 @@ class VideosController < ApplicationController
     user.playlist.delete(video.id)
     user.videos.delete(video.id)
     user.save
-    video.destroy
+    video.destroy if video.users.size > 1
     flash[:success] = "Video was deleted."
     redirect_to root_url
   end
