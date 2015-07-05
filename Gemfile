@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: [:development, :test]
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.1'
 # Use Uglifier as compressor for JavaScript assets
@@ -32,9 +32,17 @@ gem 'autoprefixer-rails'
 gem 'rails-observers'
 gem 'omniauth-google-oauth2'
 gem 'active_type'
-gem 'pry'
-gem 'better_errors'
-gem 'binding_of_caller'
+
+group :development do
+  gem 'pry'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
