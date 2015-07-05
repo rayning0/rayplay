@@ -10,6 +10,6 @@ class CreateVideos < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :videos, :uid
+    add_index :videos, :uid, unique: true
   end
 end
