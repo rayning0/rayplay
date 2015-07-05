@@ -37,7 +37,7 @@ input[type="checkbox"]{
   width: 130px;
   height: 48px;
   display:block;
-  background-image:url(/assets/off.png);
+  background-image: url(asset-path('off.png'));
   -webkit-appearance:none;
   -webkit-transition:1s;
   padding:3px 4px 3px 4px;
@@ -52,13 +52,13 @@ input[type="checkbox"]:after{
   width: 60px;
   height: 44px;
   border-radius: 8px; /* from vector shape */
-  background-image:url(/assets/knob.png);
+  background-image: url(asset-path('knob.png'));
   color: #f9f3b6;
 }
 input[type="checkbox"]:checked {
       padding-left: 67px;
       padding-right: 0;
-  background-image:url(/assets/on.png);
+  background-image: url(asset-path('on.png'));
 }
 input[type="checkbox"]:hover {
   opacity:1;

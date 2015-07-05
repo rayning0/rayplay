@@ -5,6 +5,7 @@ class VideosController < ApplicationController
 
   def index
     puts "index: #{user.playlist.reverse}"
+    puts "video ids: #{user.videos.map(&:id)}"
     @videos = user.videos.reverse
   end
 
@@ -39,8 +40,9 @@ class VideosController < ApplicationController
         user.playlist << vid
         user.videos << video
       end
-      puts "after duplicate: #{user.playlist}"
       user.save
+      puts "after duplicate playlist: #{user.playlist}"
+      puts "after duplicate videos: #{user.videos.map(&:id)}"
     end
     redirect_to root_url
   end
