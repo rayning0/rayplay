@@ -9,3 +9,5 @@ Problem: Often when we play YouTube music videos, we want them to repeat automat
 Solution: I let you repeat play either any YouTube video or playlist, by default. You may easily build your playlist by searching directly for YouTube videos, then dragging/dropping them in the right order.
 
 To like/dislike and upload videos, you must log in with your Google account. You must give this app [permission to access your YouTube/Google account](https://security.google.com/settings/security/permissions).
+
+(It uses [OmniAuth2](https://github.com/zquestz/omniauth-google-oauth2) to authenticate with Google.)
