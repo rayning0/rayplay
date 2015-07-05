@@ -21,7 +21,6 @@ class VideosController < ApplicationController
         puts "new playlist: #{user.playlist}"
         user.videos << video
         user.save
-        binding.pry
       else
         render :new
       end

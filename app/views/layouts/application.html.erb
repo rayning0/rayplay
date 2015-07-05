@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>YtVideo</title>
+  <title>RayPlay</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -21,10 +21,12 @@
           <li><%= link_to 'Upload Video', new_video_upload_path, class: 'navbar-brand' %></li>
         <% end %>
         <li><span><%= link_to "Fullscreen yt Gem", 'https://github.com/Fullscreen/yt' %> | <%= link_to "Guide", 'http://fullscreen.github.io/yt/' %></span></li>
-        <li><%= link_to 'YouTube API v3', 'https://developers.google.com/youtube/v3/' %></li>
       </ul>
 
       <ul class='nav navbar-nav pull-right'>
+
+        <li><input type="checkbox"></li>
+
         <% if current_user %>
           <li><span><%= current_user.name %></span></li>
           <li><%= link_to 'Log Out', logout_path, method: :delete %></li>
@@ -49,7 +51,7 @@
 
 </div></div>
 
-<div id='footer'>Built in LA with ♥ by <%= link_to 'Raymond Gan', 'https://github.com/rayning0/yt-video-player' %></div>
+<div id='footer'>Built in LA with ♥ by <%= link_to 'Raymond Gan', 'https://github.com/rayning0/rayplay' %></div>
 
 </body>
 </html>
