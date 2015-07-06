@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RayPlay: a repeating YouTube player</title>
+  <title>RayPlay: repeating YouTube player</title>
   <meta name='description' content='By Raymond Gan. Written in Ruby on Rails and JavaScript. Uses YouTube API to let you create your own repeating YouTube playlists. All videos repeat automatically.' />
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -11,6 +11,14 @@
   <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=200009383400570";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <div id='wrapper'><div id='content'>
 
@@ -53,7 +61,8 @@
 
 </div></div>
 
-<div id='footer'>Built in LA with ♥ by <%= link_to 'Raymond Gan', 'https://github.com/rayning0/rayplay' %></div>
+<div id='footer'>Built in LA with ♥ by <%= link_to 'Raymond Gan', 'https://github.com/rayning0/rayplay' %> <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://rayplay.herokuapp.com" data-text="RayPlay: repeating YouTube player. Easily make playlists!" data-via="rgan0">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div>
 
 </body>
 </html>
