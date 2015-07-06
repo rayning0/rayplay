@@ -4,9 +4,9 @@ class VideosController < ApplicationController
   before_action :get_user, only: [:index, :create, :destroy]
 
   def index
-    puts "index: #{user.playlist.reverse}"
-    puts "video ids: #{user.videos.map(&:id).reverse}"
-    @videos = user.videos.reverse
+    puts "playlist video ids: #{user.playlist.map(&:video_id)}"
+    puts "video ids: #{user.videos.map(&:id)}"
+    @videos = user.videos
   end
 
   def new
@@ -18,9 +18,8 @@ class VideosController < ApplicationController
     begin
       if video.save
         flash[:success] = 'Video added!'
-        user.playlist << video.id
-        puts "new playlist: #{user.playlist}"
         user.videos << video
+        puts "new playlist position: #{user.playlist.find_by(video_id: video.id).position}"
         user.save
       else
         render :new
@@ -29,19 +28,17 @@ class VideosController < ApplicationController
     rescue ActiveRecord::RecordNotUnique
       video = Video.find_by(uid: @video.uid)
       vid = video.id
-      index = user.playlist.index(vid)
 
       if user.videos.map(&:id).include?(vid)
-        # move id of duplicate video to end of playlist
-        user.playlist << user.playlist.delete_at(index)
-        user.videos << user.videos.delete(vid)
+        # move duplicate video to front of playlist
+        # and reorder all other video positions
+        user.playlist.find_by(video_id: vid).move_to_bottom
+        user.reload
       else
         # where user's logged in but video not in user's playlist
-        user.playlist << vid
         user.videos << video
       end
       user.save
-      puts "after duplicate playlist: #{user.playlist}"
       puts "after duplicate videos: #{user.videos.map(&:id)}"
     end
     redirect_to root_url
@@ -49,11 +46,8 @@ class VideosController < ApplicationController
 
   def destroy
     @video = Video.find(params[:id])
-    user.playlist_will_change! # need it so Rails remembers deletion
-    user.playlist.delete(video.id)
     user.videos.delete(video.id)
     user.save
-    video.destroy if video.users.size > 1
     flash[:success] = "Video was deleted."
     redirect_to root_url
   end
